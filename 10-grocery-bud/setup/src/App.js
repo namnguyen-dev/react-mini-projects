@@ -11,22 +11,30 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if(!name) {
+    if (!name) {
       // display alert
-    } else if(name && isEditing===true){
+     showAlert(true, 'please enter value', 'danger');
+    } else if (name && isEditing === true) {
       // deal with edit
-    } else{
+    } else {
       // show alert
-      const newItem = {id: new Date().getTime().toString(), title:name}
-      setList([...list,newItem])
-      setName('')
+      setAlert({ show: true, msg: 'item added', type: 'success' });
+      const newItem = { id: new Date().getTime().toString(), title: name };
+      setList([...list, newItem]);
+      setName('');
     }
   };
+
+   const showAlert = (show = false, msg = '', type = '') => {
+     setAlert({ show, msg, type });
+   };
+
+  
 
   return (
     <section className="section-center">
       <form action="" className="grocery-form" onSubmit={handleSubmit}>
-        {alert.show && <Alert />}
+        {alert.show && <Alert {...alert} removeAlert={showAlert}/>}
         <h3>Grocery Bud</h3>
         <div className="form-control">
           <input
