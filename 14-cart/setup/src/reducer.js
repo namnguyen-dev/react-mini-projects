@@ -1,3 +1,5 @@
+import CartItem from "./CartItem";
+
 const reducer = (state, action) => {
     if(action.type === 'CLEAR_CART') {
         return {...state, cart: []}
@@ -14,6 +16,15 @@ const reducer = (state, action) => {
            }
            return cardItem;
          });
+         return { ...state, cart: tempCart };
+    }
+    if(action.type === 'DECREASE') {
+         let tempCart = state.cart.map(cardItem => {
+           if (cardItem.id === action.payload) {
+             return { ...cardItem, amount: cardItem.amount - 1 };
+           }
+           return cardItem;
+         }).filter((cardItem)=> cardItem.amount !==0)
          return { ...state, cart: tempCart };
     }
 
