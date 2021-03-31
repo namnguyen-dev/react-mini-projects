@@ -2,7 +2,6 @@ import React from 'react';
 import Cocktail from './Cocktail';
 import Loading from './Loading';
 import { useGlobalContext } from '../context';
-import { getByTitle } from '@testing-library/dom';
 
 const CocktailList = () => {
   const { cocktails, loading } = useGlobalContext();
