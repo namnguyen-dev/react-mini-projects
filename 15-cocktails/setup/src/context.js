@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
             glass: strGlass,
           };
         });
-        setCocktails(newCocktails)
+        setCocktails(newCocktails);
       } else {
         setCocktails([]);
       }
@@ -46,7 +46,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchDrinks();
-  }, [setSearchTerm]);
+  }, [searchTerm]);
 
   return (
     <AppContext.Provider value={{ loading, cocktails, setSearchTerm }}>
