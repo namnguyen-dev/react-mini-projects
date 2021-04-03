@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import {url} from './Movies'
 
 import useFetch from './useFetch';
 
@@ -24,7 +25,7 @@ const {isLoading, error, data:movie} = useFetch(`&i=${id}`)
 
   return (
     <section className="single-movie">
-      <img src={poster} alt={title} />
+      <img src={poster ==='N/A'? url: poster } alt={title} />
       <div className="single-movie-info">
         <h2>{title}</h2>
         <p>{plot}</p>
