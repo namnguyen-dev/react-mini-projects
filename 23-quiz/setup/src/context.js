@@ -38,15 +38,42 @@ const AppProvider = ({ children }) => {
         setLoading(false);
         setWaiting(false);
         setError(false);
-      }else{
-        setWaiting(true)
-        setError(true)
+      } else {
+        setWaiting(true);
+        setError(true);
       }
     } else {
       setWaiting(true);
     }
   };
 
+  const nextQuestion = index => {
+    setIndex(oldIndex => {
+      const index = oldIndex + 1;
+      if (index > questions.length - 1) {
+        openModal();
+        return 0;
+      } else {
+        return index;
+      }
+    });
+  };
+
+  const checkAnswer = value => {
+    if (value) {
+      setCorrect(oldState => oldState + 1);
+    }
+    nextQuestion();
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setWaiting(true);
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     fetchQuestions(tempUrl);
   }, []);
@@ -61,6 +88,10 @@ const AppProvider = ({ children }) => {
         correct,
         error,
         isModalOpen,
+        nextQuestion,
+        checkAnswer,
+        closeModal,
+        openModal,
       }}
     >
       {children}
